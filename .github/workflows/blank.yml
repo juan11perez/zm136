@@ -32,7 +32,11 @@ jobs:
         run: |
           docker login -u $DOCKER_USER --password-stdin $DOCKER_PASSWORD
  
- # Runs a single command using the runners shell
+      # Runs a single command using the runners shell
       - name: docker build
         run: |
           docker build . -t ghcr.io/juan11perez/zm136:0
+          
+      - name: docker push
+        run: |
+          docker push ghcr.io/juan11perez/zm136:0         
