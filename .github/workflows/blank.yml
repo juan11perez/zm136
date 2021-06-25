@@ -33,8 +33,10 @@ jobs:
 #           docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
           
       - name: docker login
+        env:
+          CR_PAT: ${{secrets.CR_PAT}}      
         run: |
-          docker login ghcr.io -u juan11perez --password-stdin
+          docker login ghcr.io -u juan11perez --password-stdin $CR_PAT
           
 
       # Runs a single command using the runners shell
