@@ -36,7 +36,7 @@ jobs:
         env:
           CR_PAT: ${{secrets.CR_PAT}}      
         run: |
-          docker login ghcr.io -u juan11perez --password-stdin $CR_PAT
+          echo $CR_PAT | docker login ghcr.io -u juan11perez --password-stdin
           
 
       # Runs a single command using the runners shell
