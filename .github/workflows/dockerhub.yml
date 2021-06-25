@@ -6,8 +6,8 @@ name: Publish Docker image
 # documentation.
 
 on:
-  release:
-    types: [main]
+  push:
+    branches: [main]
 jobs:
   push_to_registry:
     name: Push Docker image to Docker Hub
