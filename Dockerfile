@@ -20,7 +20,7 @@ ENV		DEBCONF_NONINTERACTIVE_SEEN="true" \
 COPY		init/ /etc/my_init.d/
 COPY		defaults/ /root/
 
-# RUN 	apt-get update && \
+# RUN 		apt-get update && \
 		# apt-get -y install software-properties-common runit-systemd && \
 RUN		add-apt-repository -y ppa:iconnor/zoneminder-$ZM_VERS && \
 		add-apt-repository ppa:ondrej/php && \
@@ -134,6 +134,3 @@ EXPOSE		80 443 9000
 
 CMD		["/sbin/my_init"]
 
-
-
-# sed -i 's/INSTALL_CORAL_EDGETPU:-no/INSTALL_CORAL_EDGETPU:-yes/g' /root/zmeventnotification/install.sh && \
