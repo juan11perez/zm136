@@ -6,7 +6,7 @@ ENV		DEBCONF_NONINTERACTIVE_SEEN="true" \
 		DEBIAN_FRONTEND="noninteractive" \
 		DISABLE_SSH="true" \
 		HOME="/root" \
-		LC_ALL="C.UTF-8" \
+		LC_ALL="en_US.UTF-8" \
 		LANG="en_US.UTF-8" \
 		LANGUAGE="en_US.UTF-8" \
 		TZ="Etc/UTC" \
@@ -19,12 +19,10 @@ ENV		DEBCONF_NONINTERACTIVE_SEEN="true" \
 
 COPY		init/ /etc/my_init.d/
 COPY		defaults/ /root/
-# COPY	zmeventnotification/ /root/zmeventnotification/
-# COPY	./my_init  /sbin/
 
-RUN 		apt-get update && \
-		apt-get -y install --no-install-recommends software-properties-common runit-systemd && \
-		add-apt-repository -y ppa:iconnor/zoneminder-$ZM_VERS && \
+# RUN 	apt-get update && \
+		# apt-get -y install software-properties-common runit-systemd && \
+RUN		add-apt-repository -y ppa:iconnor/zoneminder-$ZM_VERS && \
 		add-apt-repository ppa:ondrej/php && \
 		add-apt-repository ppa:ondrej/apache2 && \
 		apt-get update && \
@@ -88,8 +86,8 @@ RUN		mv /root/zoneminder /etc/init.d/zoneminder && \
 		service apache2 start && \
 		service zoneminder start
 
-RUN		touch /usr/lib/tmpfiles.d/zoneminder.conf && \
-		systemd-tmpfiles --create zoneminder.conf && \
+# RUN		touch /usr/lib/tmpfiles.d/zoneminder.conf && \
+RUN		systemd-tmpfiles --create zoneminder.conf && \
 		mv /root/default-ssl.conf /etc/apache2/sites-enabled/default-ssl.conf && \
 		mkdir /etc/apache2/ssl/ && \
 		mkdir -p /var/lib/zmeventnotification/images && \
@@ -135,7 +133,6 @@ VOLUME \
 EXPOSE		80 443 9000
 
 CMD		["/sbin/my_init"]
-
 
 
 
