@@ -134,3 +134,8 @@ EXPOSE		80 443 9000
 
 CMD		["/sbin/my_init"]
 
+
+# Added line 97 "mkdir /etc/cron.weekly/ && \" when trying to build from nvidia image
+
+
+
