@@ -17,8 +17,9 @@ ENV		DEBCONF_NONINTERACTIVE_SEEN="true" \
 		PGID="100"\
 		OPEN_CV_VERSION="4.5.2"
 
-COPY		init/ /etc/my_init.d/
 COPY		defaults/ /root/
+COPY		init/ /etc/my_init.d/
+RUN		chmod +x /etc/my_init.d/*
 
 # RUN 		apt-get update && \
 		# apt-get -y install software-properties-common runit-systemd && \
