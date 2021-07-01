@@ -15,7 +15,8 @@ ENV		DEBCONF_NONINTERACTIVE_SEEN="true" \
 		ZM_VERS="1.36" \
 		PUID="99" \
 		PGID="100"\
-		OPEN_CV_VERSION="4.5.2"
+		OPEN_CV_VERSION="4.5.2" \
+		SERVER_PORT="80"
 
 COPY		defaults/ /root/
 COPY		init/ /etc/my_init.d/
@@ -126,6 +127,8 @@ RUN		apt-get -y clean && \
 		apt-get -y autoremove && \
 		rm -rf /tmp/* /var/tmp/* /root/zmeventnotification* /root/my_init && \
 		chmod +x /etc/my_init.d/*.sh
+
+HEALTHCHECK 	--interval=30s --timeout=5s --start-period=5s CMD curl --fail http://localhost:$SERVER_PORT/health || exit 1
 
 VOLUME \
 		["/config"] \
