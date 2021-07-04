@@ -1,4 +1,4 @@
-# FROM nvidia/cuda:11.2.0-cudnn8-devel-ubuntu20.04
+# FROM 		nvidia/cuda:11.2.0-cudnn8-devel-ubuntu20.04
 FROM		phusion/baseimage:master
 # LABEL maintainer=""
 
@@ -15,8 +15,7 @@ ENV		DEBCONF_NONINTERACTIVE_SEEN="true" \
 		ZM_VERS="1.36" \
 		PUID="99" \
 		PGID="100"\
-		OPEN_CV_VERSION="4.5.2" \
-		SERVER_PORT="80"
+		OPEN_CV_VERSION="4.5.2"
 
 COPY		defaults/ /root/
 COPY		init/ /etc/my_init.d/
@@ -62,7 +61,7 @@ RUN		apt-get -y install python3-pip && \
 		sed -i 's#/path/to/key/file.pem#/etc/apache2/ssl/zoneminder.key#g'  /root/zmeventnotification/secrets.ini && \
 		yes | INSTALL_CORAL_EDGETPU=yes INSTALL_YOLOV3=yes INSTALL_YOLOV4=yes INSTALL_TINYYOLOV3=no INSTALL_TINYYOLOV4=yes ./install.sh
 
-# install coral usb libraries
+		# install coral usb libraries
 RUN 		echo "deb https://packages.cloud.google.com/apt coral-edgetpu-stable main" | tee /etc/apt/sources.list.d/coral-edgetpu.list && \
 		curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - && \
 		apt-get update && apt-get -y install gasket-dkms libedgetpu1-std python3-pycoral
@@ -128,8 +127,6 @@ RUN		apt-get -y clean && \
 		rm -rf /tmp/* /var/tmp/* /root/zmeventnotification* /root/my_init && \
 		chmod +x /etc/my_init.d/*.sh
 
-HEALTHCHECK 	--interval=30s --timeout=5s --start-period=5s CMD curl --fail http://localhost:$SERVER_PORT/health || exit 1
-
 VOLUME \
 		["/config"] \
 		["/var/cache/zoneminder"]
@@ -139,7 +136,6 @@ EXPOSE		80 443 9000
 CMD		["/sbin/my_init"]
 
 
+
 # Added line 97 "mkdir /etc/cron.weekly/ && \" when trying to build from nvidia image
-
-
-
+# HEALTHCHECK 	--interval=30s --timeout=5s --start-period=5s CMD curl --fail http://localhost:$SERVER_PORT/health || exit 1
