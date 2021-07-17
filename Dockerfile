@@ -1,4 +1,4 @@
-# FROM 		nvidia/cuda:11.2.0-cudnn8-devel-ubuntu20.04
+# FROM	 	nvidia/cuda:11.2.0-cudnn8-devel-ubuntu20.04
 FROM		phusion/baseimage:master
 # LABEL maintainer=""
 
@@ -53,7 +53,7 @@ RUN		rm /etc/mysql/my.cnf && \
 RUN		apt-get -y install python3-pip && \
 		apt-get -y install libopenblas-dev liblapack-dev libblas-dev && \
 		pip3 install future && pip3 install face_recognition && \
-		cd /root && git clone https://github.com/pliablepixels/zmeventnotification.git && \
+		cd /root && git clone https://github.com/zoneminder/zmeventnotification.git && \
 		cd zmeventnotification && git fetch --tags && \
 		git checkout $(git describe --tags $(git rev-list --tags --max-count=1)) 2>/dev/null && \	
 		# Replace certificate path in secrets.ini file
