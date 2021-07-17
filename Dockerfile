@@ -15,7 +15,7 @@ ENV		DEBCONF_NONINTERACTIVE_SEEN="true" \
 		ZM_VERS="1.36" \
 		PUID="99" \
 		PGID="100"\
-		OPEN_CV_VERSION="4.5.2"
+		OPEN_CV_VERSION="4.5.3"
 
 COPY		defaults/ /root/
 COPY		init/ /etc/my_init.d/
